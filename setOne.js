@@ -44,24 +44,39 @@ The second parameter is [parameter2]'.
 
 // CODE HERE
 
-const paramFn = parameter1 => `The first parameter ${parameter1}`
-
-paramFn('parameter1')
+const paramFn = parameter1 => console.log(`The first parameter ${parameter1}`)
 
 // INVOKE THE FUNCTION HERE. THE PARAMETERS TAKE ANY DATATYPE.
 
+paramFn('parameter1')
 
 ////////// PROBLEM 3 //////////
 /*
-Write a function called 'greeting' that takes 3 parameters: firstName, lastName, and a callback function. In the function, invoke the callback, passing in a concatenation of firstName and lastName. 
-Then, outside of the greeting function, invoke the greeting function, passing in the value firstName and lastName of your choice, and a callback function that takes a parameter of fullName. The callback function will print 'Hello, my full name is [fullName]'. 
+Write a function called 'greeting' that takes 3 parameters: firstName, lastName, and a 
+callback function. In the function, invoke the callback, passing in a concatenation of 
+firstName and lastName. 
+
+Then, outside of the greeting function, invoke the greeting function, passing in the 
+value firstName and lastName of your choice, and a callback function that takes a 
+parameter of fullName. The callback function will print 'Hello, my full name is 
+[fullName]'. 
 */
 
 // CODE 'GREETING FUNCTION' HERE
 
+const greeting = (firstName, lastName,fullName) => { 
+    let concatenation = `${firstName} ${lastName}`;
+    fullName(concatenation)
+}
+
+
+const printGreeting = (fullName) => {       
+    return console.log(`Hello my full name is ${fullName}`);
+}
 
 // INVOKE 'GREETING FUNCTION' HERE
 
+greeting('Jorge', 'Peraza', printGreeting)
 
 ////////// PROBLEM 4 //////////
 
@@ -72,11 +87,33 @@ let totalCost = []
 // ***** Do not edit the code above *****
 
 /* 
-Write a function called 'pricesPlusTax' that takes 2 params: an array ('prices' array) and a callback function. Inside the function, loop over the 'prices' array. For every iteration, calculate a new total cost (original price plus 20% tax), then push it to the 'totalCost' array. After the loop, invoke the callback function, passing in the 'totalCost' array.
+Write a function called 'pricesPlusTax' that takes 2 params: an array ('prices' array) 
+and a callback function. Inside the function, loop over the 'prices' array. For every 
+iteration, calculate a new total cost (original price plus 20% tax), then push it to 
+the 'totalCost' array. After the loop, invoke the callback function, passing in the 
+'totalCost' array.
 */
 
 // CODE HERE
 
+const pricesPlusTax = (pricesArr, callback) => {
+    pricesArr.forEach(function(element){totalCost.push(element * 1.2)}) 
+    callback(totalCost);
+}
+
+
+
+// const pricesPlusTax = (priceArray, callback) => {
+//     //for let
+//     for(let price of priceArray){
+//         totalCost.push(price * 1.2);
+//     }
+//     callback(totalCost);
+// }
+
+printPrices = (these) => {
+    console.log(these);
+}
 
 /* 
 Invoke the 'pricesPlusTax' function, passing in the 'prices' array and a callback function (passing in 'totalCost' as a param) that will print "The new array plus tax = [totalCost]"
@@ -85,37 +122,62 @@ Invoke the 'pricesPlusTax' function, passing in the 'prices' array and a callbac
 // CODE HERE
 
 
+pricesPlusTax(prices, printPrices)
+
+
 ////////// PROBLEM 5 //////////
 
 /* 
 A function can return another function. Let's create one!
 
-Create a function called 'multiplyingFactory' that takes a number as a param. The function returns another function that takes another number as a param. 
+Create a function called 'multiplyingFactory' that takes a number as a 
+param. The 
+function returns another function that takes another number as a param. 
 
-The inner function should run this logic: if the first number passing in is greater than and equal to 5, print the multiplication of the first and second numbers. If not, print "Cannot multiply: the first number is smaller than 5." 
+The inner function should run this logic: if the first number passing in is 
+greater 
+than and equal to 5, print the multiplication of the first and second 
+numbers. If not, 
+print "Cannot multiply: the first number is smaller than 5." 
 */
 
 // CODE HERE
 
+const multiplyingFactory = (num, multiplyer) => {if(num >= 5){
+      return num * multiplyer
+    } return "Cannot multiply: the first number is smaller than 5."}
 
 /* 
-Let's invoke the 'multiplyingFactory' function that will return another function, and save it into a variable called 'timesFour.' Let's pass in number 3 as a param.
+Let's invoke the 'multiplyingFactory' function that will return another 
+function, and save it into a variable called 'timesFour.' 
+Let's pass in number 3 as a param.
 */
 
 // CODE HERE
 
+let timesFour = num => multiplyingFactory(num, 4)
+console.log(timesFour)
 
 /* 
-Now, timesFour is the new function (the inner function that was being returned when we invoked 'multiplyingFactory' function). The number 3 that we passed in as a first number is now saved in the 'timesFour' function. 
+Now, timesFour is the new function (the inner function that was being 
+returned when we invoked 'multiplyingFactory' function). The number num 
+that we passed in as a first number is now saved in the 'timesFour' 
+function. 
 
-Let's invoke 'timesFour' and pass in number 4 as a param. Number 4 here is the second number that will multiply the first number (number 3).
+Let's invoke 'timesFour' and pass in number 4 as a param. 
+Number 4 here is the second number that will multiply the first number 
+(number 3).
 
-Run the code in node to see the printed result. You should see "Cannot multiply: the first number is smaller than 5."
+Run the code in node to see the printed result. 
+You should see "Cannot multiply: the first number is smaller than 5."
 */
 
 // INVOKE 'timesFour' HERE
 
+console.log(timesFour(5))
 
 /* 
-Change the param for 'multiplyingFactory' invocation to number 5. Then invoke 'timesFour' again, passing in number 4. Run the code in node, and you should see 20.
+Change the param for 'multiplyingFactory' invocation to number 5. 
+Then invoke 'timesFour' again, passing in number 4. Run the code in 
+node, and you should see 20.
 */
